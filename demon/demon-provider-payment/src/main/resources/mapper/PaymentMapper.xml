@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.hu.mapper.PaymentMapper">
+
+<!--    <resultMap id="UserLoginLogoutLogResultMap" type="com.rao.pojo.entity.UserLoginLogoutLog">-->
+<!--        <id property="id" column="id"  />-->
+<!--        <result property="userId" column="user_id" />-->
+<!--        <result property="userName" column="user_name" />-->
+<!--        <result property="phone" column="phone" />-->
+<!--        <result property="type" column="type" />-->
+<!--        <result property="ip" column="ip" />-->
+<!--        <result property="country" column="country" />-->
+<!--        <result property="province" column="province" />-->
+<!--        <result property="city" column="city" />-->
+<!--        <result property="area" column="area" />-->
+<!--        <result property="isp" column="isp" />-->
+<!--        <result property="createTime" column="create_time" />-->
+<!--        <result property="userType" column="user_type" />-->
+<!--        <result property="wxOpenid" column="wx_openid" />-->
+<!--    </resultMap>-->
+
+<!--    &lt;!&ndash; 定义可重用的SQL代码段，可以包含在其他语句中 &ndash;&gt;-->
+<!--    <sql id="base_column">-->
+<!--		 id ,user_id ,user_name ,phone ,type ,ip ,country ,province ,city ,area ,isp ,create_time ,user_type ,wx_openid-->
+<!--	</sql>-->
+
+<!--    <sql id="base_value_column">-->
+<!--		 #{id},#{userId},#{userName},#{phone},#{type},#{ip},#{country},#{province},#{city},#{area},#{isp},#{createTime},#{userType},#{wxOpenid}-->
+<!--	</sql>-->
+
+    <resultMap id="BaseResultMap" type="com.hu.pojo.entity.Payment">
+        <id property="paymentId" column="payment_id"  />
+        <result property="serial" column="serial" />
+    </resultMap>
+
+    <insert id="create" parameterType="com.hu.pojo.entity.Payment" useGeneratedKeys="true" keyProperty="payment_id">
+        insert  into payment(payment_id,serial) values(#{payment_id},#{serial});
+    </insert>
+</mapper>
