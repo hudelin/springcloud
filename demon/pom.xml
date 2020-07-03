@@ -19,6 +19,7 @@
         <module>demon-gateway</module>
         <module>demon-nacos-provider</module>
         <module>demon-nacos-config</module>
+        <module>demon-sentinel</module>
     </modules>
     <name>demon</name>
     <packaging>pom</packaging>

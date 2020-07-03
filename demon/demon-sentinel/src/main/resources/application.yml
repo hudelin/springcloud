@@ -1,0 +1,34 @@
+server:
+  port: 8401
+  servlet:
+    context-path: /demon-sentinel
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  # eureka 注册名称
+  application:
+    name: demon-sentinel
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        # sentinel dashboard 启动地址
+        dashboard: 127.0.0.1:8080
+        # 默认为8719
+        port: 8719
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+
+
+
+
+

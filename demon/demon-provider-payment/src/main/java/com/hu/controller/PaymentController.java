@@ -25,11 +25,11 @@ public class PaymentController {
 
     @RequestMapping(value = "/payment",method = RequestMethod.POST)
     public ResultMessage payment(@RequestBody Payment payment) {
-//        try{
-//            TimeUnit.SECONDS.sleep(2);
-//        }catch (InterruptedException e){
-//            e.printStackTrace();
-//        }
+        try{
+            TimeUnit.SECONDS.sleep(10);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
         return ResultMessage.success().message("payment调用成功");
     }
 }
