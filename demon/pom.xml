@@ -17,6 +17,8 @@
         <module>demon-consumer-order</module>
         <module>demon-eureka</module>
         <module>demon-gateway</module>
+        <module>demon-nacos-provider</module>
+        <module>demon-nacos-config</module>
     </modules>
     <name>demon</name>
     <packaging>pom</packaging>
