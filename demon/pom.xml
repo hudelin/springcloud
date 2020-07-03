@@ -11,16 +11,16 @@
     <groupId>com.hu</groupId>
     <artifactId>demon</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>demon-provider-payment</module>
         <module>demon-api-common</module>
         <module>demon-consumer-order</module>
-        <module>demon-eureka</module>
         <module>demon-gateway</module>
-        <module>demon-nacos-provider</module>
         <module>demon-nacos-config</module>
         <module>demon-sentinel</module>
     </modules>
+
     <name>demon</name>
     <packaging>pom</packaging>
     <description>Demo project for Spring Boot</description>
