@@ -1,0 +1,21 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /demon-security-auth
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  application:
+    name: demon-security-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+

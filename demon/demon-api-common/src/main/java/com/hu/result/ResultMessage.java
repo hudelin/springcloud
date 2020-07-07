@@ -51,28 +51,28 @@ public class ResultMessage<T> {
         return message;
     }
 
-//    /**
-//     * 成功
-//     * @return
-//     */
-//    public static<T> ResultMessage<T> success(T data){
-//        ResultMessage<T> message=new ResultMessage<>();
-//        message.setCode(successMsgEnum.getCode());
-//        message.setMessage(successMsgEnum.getMsg());
-//        message.setData(data);
-//        return message;
-//    }
-//
-//    /**
-//     * 失败
-//     * @return
-//     */
-//    public static ResultMessage fail(){
-//        ResultMessage message=new ResultMessage();
-//        message.setCode(errorMsgEnum.getCode());
-//        message.setMessage(errorMsgEnum.getMsg());
-//        return message;
-//    }
+    /**
+     * 成功
+     * @return
+     */
+    public static<T> ResultMessage<T> success(T data){
+        ResultMessage<T> message=new ResultMessage<>();
+        message.setCode(successMsgEnum.getCode());
+        message.setMessage(successMsgEnum.getMsg());
+        message.setData(data);
+        return message;
+    }
+
+    /**
+     * 失败
+     * @return
+     */
+    public static ResultMessage fail(){
+        ResultMessage message=new ResultMessage();
+        message.setCode(errorMsgEnum.getCode());
+        message.setMessage(errorMsgEnum.getMsg());
+        return message;
+    }
 
     /**
      * 构建自定义信息

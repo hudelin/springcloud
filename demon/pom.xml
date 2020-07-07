@@ -19,6 +19,7 @@
         <module>demon-gateway</module>
         <module>demon-nacos-config</module>
         <module>demon-sentinel</module>
+        <module>demon-security-auth</module>
     </modules>
 
     <name>demon</name>
