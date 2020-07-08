@@ -6,6 +6,8 @@ import com.hu.pojo.dto.PasswordLoginDTO;
 import com.hu.pojo.vo.LoginSuccessVO;
 import com.hu.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -28,6 +30,8 @@ public class LoginServiceImpl implements LoginService {
 
     @Resource
     private RestTemplate restTemplate;
+    @Resource
+    private LoadBalancerClient loadBalancerClient;
 
     @Override
     public LoginSuccessVO pwdLogin(PasswordLoginDTO passwordLoginDTO) {
@@ -46,22 +50,13 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     private LoginSuccessVO requestAccessToken(MultiValueMap<String, String> requestParam){
-//        ServiceInstance serviceInstance = loadBalancerClient.choose(ServiceInstanceConstant.RAIN_AUTH);
-//        if(serviceInstance == null){
-//            throw BusinessException.operate("当前系统不稳定，请检查注册中心状态");
-//        }
-//
-//        String url = serviceInstance.getUri() + "/auth/oauth/token";
-        String url = "http://demon-security-auth/demon-security-auth/oauth/token";
+        String url = "http://demon-security-auth/" + "demon-security-auth/oauth/token";
         HttpHeaders headers = new HttpHeaders();
+        //设置请求为，x-www-form-urlencoded 格式
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(requestParam, headers);
         try{
             OauthTokenResponse response = restTemplate.postForObject(url, request, OauthTokenResponse.class);
-//            return LoginSuccessVO.builder()
-//                    .accessToken(response.getAccess_token())
-//                    .build();
             return LoginSuccessVO.builder()
                     .accessToken(response.getAccess_token())
                     .build();

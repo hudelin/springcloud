@@ -29,7 +29,7 @@ public class LoginAdminController {
      */
     @IgnoreTokenAuth
     @GetMapping(value = "/login/pwd")
-    public ResultMessage login(@RequestBody PasswordLoginDTO passwordLoginDTO)  {
+    public ResultMessage login(@RequestBody PasswordLoginDTO passwordLoginDTO) {
         LoginSuccessVO accessToken = loginService.pwdLogin(passwordLoginDTO);
         return ResultMessage.success(accessToken).message("登录成功");
     }

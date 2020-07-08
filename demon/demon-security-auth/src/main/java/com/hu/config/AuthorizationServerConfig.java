@@ -74,7 +74,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("backend")
                 .redirectUris("http://127.0.0.1:8086/demon-security-auth/auth/user")
                 // 可以设置对哪些资源有访问权限，不设置则全部资源都可以访问
-//                .resourceIds("backend-resources")
+                .resourceIds("backend-resources")
                 // 设置访问令牌的有效期，这里是 1 天
                 .accessTokenValiditySeconds(60 * 60 * 24)
                 // 设置刷新令牌的有效期，这里是 30 天
