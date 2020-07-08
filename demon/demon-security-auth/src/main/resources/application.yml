@@ -19,3 +19,14 @@ management:
       exposure:
         include: '*'
 
+# OAuth2
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://127.0.0.1:8086/demon-security-auth/auth/user
+#code模式获取code/access_token
+#http://localhost:8086/demon-security-auth/oauth/authorize?response_type=code&client_id=client&redirect_uri=http://127.0.0.1:8086/demon-security-auth/auth/user
+#grant_type,client_id,code,redirect_uri,client_secret
+#password模式获取access_token
+#grant_type,client_id,username,password,client_secret

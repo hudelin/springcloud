@@ -1,9 +1,10 @@
 package com.hu.controller;
 
-import com.hu.pojo.dto.LoginDTO;
+import com.hu.annotation.IgnoreTokenAuth;
+import com.hu.pojo.dto.PasswordLoginDTO;
+import com.hu.pojo.vo.LoginSuccessVO;
 import com.hu.result.ResultMessage;
 import com.hu.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,15 +22,15 @@ public class LoginAdminController {
     @Resource
     private LoginService loginService;
 
-
     /**
      * 后台用户登录
-     * @param loginDTO
+     * @param passwordLoginDTO
      * @return
      */
+    @IgnoreTokenAuth
     @GetMapping(value = "/login/pwd")
-    public ResultMessage login(@RequestBody LoginDTO loginDTO) {
-        String accessToken = loginService.loginAdmin(loginDTO);
+    public ResultMessage login(@RequestBody PasswordLoginDTO passwordLoginDTO)  {
+        LoginSuccessVO accessToken = loginService.pwdLogin(passwordLoginDTO);
         return ResultMessage.success(accessToken).message("登录成功");
     }
 }

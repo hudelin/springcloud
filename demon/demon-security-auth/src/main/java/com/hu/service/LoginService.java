@@ -1,6 +1,7 @@
 package com.hu.service;
 
-import com.hu.pojo.dto.LoginDTO;
+import com.hu.pojo.dto.PasswordLoginDTO;
+import com.hu.pojo.vo.LoginSuccessVO;
 
 /**
  * @author : hudelin
@@ -9,5 +10,11 @@ import com.hu.pojo.dto.LoginDTO;
  * @date: 2020-07-07 10:38
  */
 public interface LoginService {
-     String loginAdmin(LoginDTO loginDTO);
+
+     /**
+      * 密码登录
+      * @param passwordLoginDTO
+      * @return
+      */
+     LoginSuccessVO pwdLogin(PasswordLoginDTO passwordLoginDTO);
 }
