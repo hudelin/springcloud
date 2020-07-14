@@ -28,6 +28,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Resource
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     /**
      * 注入用于支持 password 模式
      */
@@ -66,8 +70,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .inMemory()
                 // client_id
                 .withClient("client")
-                //client_secret passwordEncoder.encode("secret")
-                .secret("$2a$10$nQInQwRnPK77kAwMW97gPej0lV1o1sn5jEXOdNxk68vXogV8BrWNG")
+                .secret(passwordEncoder.encode("secret"))
+//                .secret("$2a$10$nQInQwRnPK77kAwMW97gPej0lV1o1sn5jEXOdNxk68vXogV8BrWNG")
                 //授权类型，密码模式和刷新令牌
                 .authorizedGrantTypes("authorization_code", "refresh_token", "implicit", "password", "client_credentials")
                 // 授权范围
