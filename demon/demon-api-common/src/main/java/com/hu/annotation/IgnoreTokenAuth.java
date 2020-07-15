@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
  * @date 2020/7/7 23:00
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target({ElementType.TYPE,ElementType.METHOD})
 public @interface IgnoreTokenAuth {
 }
