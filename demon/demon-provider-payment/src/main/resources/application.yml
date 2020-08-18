@@ -50,7 +50,7 @@ management:
 # mybatis
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.hu.pojo.entity
+  type-aliases-package: com.hu.pojo.po
   configuration:
     map-underscore-to-camel-case: true
 
@@ -61,6 +61,19 @@ mybatis:
 #      rao:
 #        dao: debug
 
+
+# security
+#security:
+#  oauth2:
+#    client:
+#      client-id: client
+#      client-secret: $2a$10$nQInQwRnPK77kAwMW97gPej0lV1o1sn5jEXOdNxk68vXogV8BrWNG
+#      access-token-uri: http://demon-security-auth/demon-security-auth/auth/oauth/token
+#      user-authorization-uri: http://demon-security-auth/demon-security-auth/auth/oauth/authorize
+#      grant-type: password,refresh_token
+#      scope: backend
+#    resource:
+#      user-info-uri: http://demon-security-auth/demon-security-auth/user/info
 
 
 

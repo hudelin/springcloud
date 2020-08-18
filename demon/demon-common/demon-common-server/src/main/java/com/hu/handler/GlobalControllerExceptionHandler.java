@@ -4,9 +4,13 @@ import com.hu.exception.BusinessException;
 import com.hu.exception.BusinessMessage;
 import com.hu.result.ResultMessage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 /**
  * @author : hudelin
@@ -20,18 +24,20 @@ public class GlobalControllerExceptionHandler {
 
     /**
      * 业务异常处理器
+     *
      * @param e Exception
      * @return ApiResult
      */
     @ExceptionHandler(BusinessException.class)
     public ResultMessage businessExceptionHandler(BusinessException e) {
-        log.info("BusinessException ---> {}", e.getMessage());
         BusinessMessage businessMessage = e.getBusinessMessage();
+        log.info("BusinessException ---> {}", businessMessage.getMsg());
         return ResultMessage.build(businessMessage.getCode(), businessMessage.getMsg());
     }
 
     /**
      * 其他异常处理器
+     *
      * @param e Exception
      * @return ApiResult
      */
@@ -42,7 +48,23 @@ public class GlobalControllerExceptionHandler {
     }
 
     /**
+     * Valid入参校验异常处理器
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResultMessage methodArgumentNotValidExceptionHandler(Exception e) {
+        MethodArgumentNotValidException ex = (MethodArgumentNotValidException) e;
+        List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
+        FieldError error = fieldErrors.get(0);
+        log.info("MethodArgumentNotValidException ---> {}", error.getDefaultMessage());
+        return ResultMessage.fail().message(error.getDefaultMessage());
+    }
+
+    /**
      * 处理请求方式错误引起的异常
+     *
      * @return
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)

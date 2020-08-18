@@ -1,7 +1,6 @@
 package com.hu.service;
 
 import com.hu.pojo.bo.PaymentBO;
-import com.hu.pojo.po.Payment;
 
 /**
  * @author : hudelin

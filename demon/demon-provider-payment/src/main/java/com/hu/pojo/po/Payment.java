@@ -1,4 +1,4 @@
-package com.hu.pojo.entity;
+package com.hu.pojo.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

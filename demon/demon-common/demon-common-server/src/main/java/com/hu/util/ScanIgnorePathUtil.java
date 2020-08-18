@@ -1,7 +1,7 @@
 package com.hu.util;
 
 import com.hu.annotation.IgnoreTokenAuth;
-import com.hu.exception.BusinessException;
+//import com.hu.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ public class ScanIgnorePathUtil {
             }
         } catch (Exception e) {
             log.error("加载类异常--->{}", e.getMessage());
-            throw BusinessException.operate("加载类异常");
+//            throw BusinessException.operate("加载类异常");
         }
 
         for (Class clazz : clazzList) {

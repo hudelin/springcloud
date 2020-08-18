@@ -7,8 +7,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,11 +24,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final static String ROLE_PREFIX = "ROLE_";
 
+    @Resource
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         List<GrantedAuthority> grantedAuthorities = Lists.newArrayList();
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(ROLE_PREFIX +"USER");
         grantedAuthorities.add(grantedAuthority);
-        return UserExtend.build("user","$2a$10$SQT7CYP9BF56ukwmgmfLw.gYvrNQQJhKv0M/c4ryHHhcb6V7saXra",true,grantedAuthorities);
+        return UserExtend.build("user",passwordEncoder.encode("123456"),true,grantedAuthorities);
     }
 }
