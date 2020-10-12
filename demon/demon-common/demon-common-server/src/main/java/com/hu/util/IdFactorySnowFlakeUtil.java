@@ -16,10 +16,10 @@ import javax.annotation.PostConstruct;
 @Component
 public class IdFactorySnowFlakeUtil {
 
-    private long workerId = 0;
-    private long datacenterId = 1;
+    private static long workerId = 0;
+    private static long datacenterId = 1;
 
-    private Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
+    private static Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
 
     @PostConstruct
     public void init() {
@@ -31,12 +31,12 @@ public class IdFactorySnowFlakeUtil {
         }
     }
 
-    public synchronized long snowflakeId() {
+    public static synchronized long snowflakeId() {
 
         return snowflake.nextId();
     }
 
-    public synchronized long snowflakeId(long workerId, long datacenterId) {
+    public static synchronized long snowflakeId(long workerId, long datacenterId) {
         Snowflake snowflake = IdUtil.createSnowflake(workerId, datacenterId);
         return snowflake.nextId();
     }

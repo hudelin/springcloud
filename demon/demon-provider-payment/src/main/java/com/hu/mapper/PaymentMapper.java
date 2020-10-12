@@ -12,8 +12,4 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PaymentMapper extends BaseMapper<Payment> {
 
-    int create(Payment payment);
-
-
-
 }

@@ -13,4 +13,6 @@ public interface PaymentService {
 
     int create(PaymentBO paymentBO);
 
+    void test();
+
 }

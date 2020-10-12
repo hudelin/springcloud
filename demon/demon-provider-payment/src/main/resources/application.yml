@@ -18,6 +18,9 @@ spring:
     url: jdbc:mysql://localhost:3306/demon
     username: root
     password: mysql
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 management:
@@ -41,9 +44,7 @@ management:
 #  profiles:
 #    active: test
 
-#  jackson:
-#    date-format: yyyy-MM-dd HH:mm:ss
-#    time-zone: GMT+8
+
 #    generator:
 #      write_numbers_as_strings: true
 
@@ -62,20 +63,24 @@ mybatis:
 #        dao: debug
 
 
-# security
-#security:
-#  oauth2:
-#    client:
-#      client-id: client
-#      client-secret: $2a$10$nQInQwRnPK77kAwMW97gPej0lV1o1sn5jEXOdNxk68vXogV8BrWNG
-#      access-token-uri: http://demon-security-auth/demon-security-auth/auth/oauth/token
-#      user-authorization-uri: http://demon-security-auth/demon-security-auth/auth/oauth/authorize
-#      grant-type: password,refresh_token
-#      scope: backend
-#    resource:
-#      user-info-uri: http://demon-security-auth/demon-security-auth/user/info
+##security
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: $2a$10$nQInQwRnPK77kAwMW97gPej0lV1o1sn5jEXOdNxk68vXogV8BrWNG
+      access-token-uri: http://demon-security-auth/demon-security-auth/oauth/token
+      user-authorization-uri: http://demon-security-auth/demon-security-auth/oauth/authorize
+      grant-type: password,refresh_token
+      scope: backend
+    resource:
+      user-info-uri: http://demon-security-auth/demon-security-auth/user/info
 
-
+logging:
+  level:
+    com:
+      hu:
+       mapper: debug
 
 
 

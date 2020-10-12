@@ -28,17 +28,25 @@ public class PaymentController {
     private PaymentService paymentService;
 
 
-    @RequestMapping(value = "/payment",method = RequestMethod.POST)
-    public ResultMessage payment(@RequestBody PaymentBO paymentBO) {
+    @RequestMapping(value = "/payment",method = RequestMethod.GET)
+    public ResultMessage payment() {
 //        validateParam(payment);
 //        try{
 //            TimeUnit.SECONDS.sleep(10);
 //        }catch (InterruptedException e){
 //            e.printStackTrace();
 //        }
-        paymentService.create(paymentBO);
+//        paymentService.create(paymentBO);
         return ResultMessage.success().message("payment调用成功");
     }
+
+    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    public ResultMessage test() {
+        paymentService.test();
+        return ResultMessage.success().message("payment调用成功");
+    }
+
+
     public static void validateParam(Object o)  {
         Set<ConstraintViolation<Object>> validResult = Validation.buildDefaultValidatorFactory().getValidator().validate(o);
         if (null != validResult && validResult.size() > 0) {
