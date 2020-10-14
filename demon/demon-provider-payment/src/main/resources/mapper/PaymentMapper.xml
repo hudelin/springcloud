@@ -35,7 +35,4 @@
         <result property="serial" column="serial" />
     </resultMap>
 
-    <insert id="create" parameterType="com.hu.pojo.po.Payment" useGeneratedKeys="true" keyProperty="payment_id">
-        insert  into payment(payment_id,serial) values(#{payment_id},#{serial});
-    </insert>
 </mapper>

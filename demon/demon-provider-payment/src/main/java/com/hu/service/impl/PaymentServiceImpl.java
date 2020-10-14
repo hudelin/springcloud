@@ -7,7 +7,10 @@ import com.hu.pojo.po.Payment;
 import com.hu.service.PaymentService;
 import com.hu.util.CopyUtil;
 import com.hu.util.IdFactorySnowFlakeUtil;
+import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -34,21 +37,19 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void test() {
-
+    @Transactional(rollbackFor = Exception.class)
+    public void test() throws Exception {
+        System.out.println("payment全局事务，XID = " + RootContext.getXID());
         Random r = new Random();
-        for (int i = 0; i < 10000; i++) {
-            Payment build = Payment.builder()
-                    .serial("")
-                    .paymentId(IdFactorySnowFlakeUtil.snowflakeId())
-                    .price(BigDecimal.valueOf(r.nextInt(100)))
-                    .discount(BigDecimal.valueOf(r.nextInt(50)))
-                    .createTime(new Date())
-                    .updateTime(new Date())
-                    .deleted("0")
-                    .build();
-            paymentMapper.insert(build);
-        }
-
+        Payment build = Payment.builder()
+                .serial("测试payment")
+                .paymentId(IdFactorySnowFlakeUtil.snowflakeId())
+                .price(BigDecimal.valueOf(r.nextInt(100)))
+                .discount(BigDecimal.valueOf(r.nextInt(50)))
+                .createTime(new Date())
+                .updateTime(new Date())
+                .deleted("0")
+                .build();
+        paymentMapper.insert(build);
     }
 }

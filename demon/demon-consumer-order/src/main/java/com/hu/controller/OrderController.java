@@ -1,8 +1,7 @@
 package com.hu.controller;
 
-import com.hu.openfeign.PaymentApi;
-import com.hu.pojo.entity.Payment;
 import com.hu.result.ResultMessage;
+import com.hu.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("order")
 public class OrderController {
 
+
+
     @Autowired
-    private PaymentApi paymentApi;
+    private ScoreService scoreService;
 
-    @RequestMapping(value = "/payment",method = RequestMethod.POST)
-    public ResultMessage payment(@RequestBody Payment payment) {
-
-        return paymentApi.payment(payment);
+    @RequestMapping(value = "/payment/test",method = RequestMethod.POST)
+    public ResultMessage payment() throws Exception {
+        scoreService.test();
+        return ResultMessage.success().message("order调用成功");
     }
 }

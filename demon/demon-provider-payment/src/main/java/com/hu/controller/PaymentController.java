@@ -4,6 +4,8 @@ import com.hu.exception.BusinessException;
 import com.hu.pojo.bo.PaymentBO;
 import com.hu.result.ResultMessage;
 import com.hu.service.PaymentService;
+import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +43,8 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/test",method = RequestMethod.POST)
-    public ResultMessage test() {
+    public ResultMessage test() throws Exception {
+        System.out.println("payment全局事务，XID = " + RootContext.getXID());
         paymentService.test();
         return ResultMessage.success().message("payment调用成功");
     }

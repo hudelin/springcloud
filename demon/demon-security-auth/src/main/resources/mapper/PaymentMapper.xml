@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace必须指向Dao接口 -->
-<mapper namespace="com.hu.mapper.PaymentMapper">
+<mapper namespace="com.hu.mapper.ScoreMapper">
 
 <!--    <resultMap id="UserLoginLogoutLogResultMap" type="com.rao.pojo.entity.UserLoginLogoutLog">-->
 <!--        <id property="id" column="id"  />-->
@@ -30,12 +30,12 @@
 <!--		 #{id},#{userId},#{userName},#{phone},#{type},#{ip},#{country},#{province},#{city},#{area},#{isp},#{createTime},#{userType},#{wxOpenid}-->
 <!--	</sql>-->
 
-    <resultMap id="BaseResultMap" type="com.hu.pojo.po.Payment">
-        <id property="paymentId" column="payment_id"  />
-        <result property="serial" column="serial" />
-    </resultMap>
+<!--    <resultMap id="BaseResultMap" type="com.hu.pojo.po.Score">-->
+<!--        <id property="paymentId" column="payment_id"  />-->
+<!--        <result property="serial" column="serial" />-->
+<!--    </resultMap>-->
 
-    <insert id="create" parameterType="com.hu.pojo.po.Payment" useGeneratedKeys="true" keyProperty="payment_id">
-        insert  into payment(payment_id,serial) values(#{payment_id},#{serial});
-    </insert>
+<!--    <insert id="create" parameterType="com.hu.pojo.po.Score" useGeneratedKeys="true" keyProperty="payment_id">-->
+<!--        insert  into payment(payment_id,serial) values(#{payment_id},#{serial});-->
+<!--    </insert>-->
 </mapper>
