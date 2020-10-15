@@ -1,6 +1,7 @@
 package com.hu;
 
 import io.seata.spring.annotation.datasource.EnableAutoDataSourceProxy;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -16,7 +17,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(scanBasePackages = {"com.hu"},exclude = DataSourceAutoConfiguration.class)
 @EnableFeignClients
 @EnableDiscoveryClient
-@EnableAutoDataSourceProxy
+@MapperScan("com.hu.mapper")
+//@EnableAutoDataSourceProxy
 public class DemonConsumerOrderApplication {
 
     public static void main(String[] args) {

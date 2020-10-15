@@ -9,6 +9,7 @@ import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -46,6 +47,6 @@ public class ScoreServiceImpl implements ScoreService {
                 .build();
         scoreMapper.insert(build);
 
-//        int i =10/0;
+        int i =10/0;
     }
 }

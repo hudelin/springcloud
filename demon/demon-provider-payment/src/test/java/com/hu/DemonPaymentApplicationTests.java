@@ -11,15 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Stream;
 
 
 @SpringBootTest
@@ -36,7 +33,7 @@ public class DemonPaymentApplicationTests {
 	@Test
 	public void test() throws Exception {
 
-		Example paymentExample = new Example(Payment.class);
+//		Example paymentExample = new Example(Payment.class);
 //		paymentExample.createCriteria().andLike("paymentId","13085868898%");
 //		List<Payment> payments = paymentMapper.selectByExample(paymentExample);
 //		List<Payment> payments = paymentMapper.selectAll();

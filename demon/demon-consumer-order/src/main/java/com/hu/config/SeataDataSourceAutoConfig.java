@@ -1,16 +1,16 @@
 package com.hu.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import io.seata.rm.datasource.DataSourceProxy;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import javax.sql.DataSource;
 
@@ -27,6 +27,7 @@ public class SeataDataSourceAutoConfig {
      */
     @Autowired
     private DataSourceProperties dataSourceProperties;
+
 
     /**
      * init durid datasource
@@ -56,30 +57,46 @@ public class SeataDataSourceAutoConfig {
         druidDataSource.setLogAbandoned(true);
         return druidDataSource;
     }
+//    /**
+//     * init mybatis sqlSessionFactory
+//     * @Param: dataSourceProxy  datasource proxy
+//     * @Return: DataSourceProxy  datasource proxy
+//     */
+//    @Bean
+//    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+//        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+//        factoryBean.setDataSource(dataSource);
+//        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
+//                .getResources("classpath*:/mapper/*.xml"));
+//        return factoryBean.getObject();
+//    }
+
     /**
-     * init mybatis sqlSessionFactory
-     * @Param: dataSourceProxy  datasource proxy
-     * @Return: DataSourceProxy  datasource proxy
+     * 构造datasource代理对象，替换原来的datasource
+     * @param druidDataSource
+     * @return
      */
-    @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        factoryBean.setDataSource(dataSource);
-        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources("classpath*:/mapper/*.xml"));
-        return factoryBean.getObject();
+    @Primary
+    @Bean("dataSource")
+    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
+        return new DataSourceProxy(druidDataSource);
     }
 
-//    @Bean
-//    public SqlSessionFactoryBean sqlSessionFactoryBean(){
-//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-//        sqlSessionFactoryBean.setDataSource(dataSourceProx());
-//        return sqlSessionFactoryBean;
-//    }
-//    @Bean
-//    @ConditionalOnBean(DataSource.class)
-//    public DataSourceProxy dataSourceProx() {
-//        return new DataSourceProxy(dataSource);
-//    }
+    @Bean(name = "sqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
+        bean.setDataSource(dataSourceProxy);
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        // bean.setConfigLocation(resolver.getResource("classpath:mybatis-config.xml"));
+        bean.setMapperLocations(resolver.getResources("classpath*:mybatis/**/*-mapper.xml"));
+
+        SqlSessionFactory factory = null;
+        try {
+            factory = bean.getObject();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return factory;
+    }
 
 }
