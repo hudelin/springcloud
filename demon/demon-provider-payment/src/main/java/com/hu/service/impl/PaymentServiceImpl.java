@@ -1,17 +1,17 @@
 package com.hu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hu.mapper.PaymentMapper;
-
 import com.hu.pojo.bo.PaymentBO;
 import com.hu.pojo.po.Payment;
+import com.hu.pojo.vo.PaymentPageVO;
 import com.hu.service.PaymentService;
 import com.hu.util.CopyUtil;
 import com.hu.util.IdFactorySnowFlakeUtil;
 import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -57,5 +57,16 @@ public class PaymentServiceImpl implements PaymentService {
                 .build();
         paymentMapper.insert(build);
         testImpl.test();
+    }
+
+    @Override
+    public Page<Payment> page(PaymentPageVO paymentPageVO) throws Exception {
+        Page<Payment> page = new Page<>(paymentPageVO.getCurrent(), paymentPageVO.getSize());
+        QueryWrapper<Payment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().like(Payment::getSerial, paymentPageVO.getSerial());
+        Page<Payment> paymentPage = paymentMapper.selectPage1(page, queryWrapper);
+//        Page<PaymentBO> paymentBOPage = paymentMapper.selectPageBO(page, queryWrapper);
+//        System.out.println(paymentBOPage);
+        return paymentPage;
     }
 }

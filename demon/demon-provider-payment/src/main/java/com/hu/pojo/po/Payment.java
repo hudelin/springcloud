@@ -1,5 +1,6 @@
 package com.hu.pojo.po;
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +33,6 @@ public class Payment {
 
     private Date updateTime;
 
+    @TableLogic
     private String deleted;
 }

@@ -1,7 +1,9 @@
 package com.hu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hu.pojo.bo.PaymentBO;
 import com.hu.pojo.po.Payment;
+import com.hu.pojo.vo.PaymentPageVO;
 
 /**
  * @author : hudelin
@@ -14,5 +16,7 @@ public interface PaymentService {
     int create(PaymentBO paymentBO);
 
     void test() throws Exception;
+
+    Page<Payment> page(PaymentPageVO paymentPageVO) throws Exception;
 
 }

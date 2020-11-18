@@ -1,9 +1,13 @@
 package com.hu.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import io.seata.rm.datasource.DataSourceProxy;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +20,11 @@ import javax.sql.DataSource;
 
 /**
  * @Author: lidong
- * @Description  seata global configuration
+ * @Description seata global configuration
  * @Date Created in 2019/9/05 10:28
  */
 @Configuration
+@MapperScan("com.hu.*.mapper*")
 public class SeataDataSourceAutoConfig {
 
     /**
@@ -27,6 +32,9 @@ public class SeataDataSourceAutoConfig {
      */
     @Autowired
     private DataSourceProperties dataSourceProperties;
+
+    @Autowired
+    private PaginationInterceptor paginationInterceptor;
 
 
     /**
@@ -36,7 +44,7 @@ public class SeataDataSourceAutoConfig {
      */
     @Bean
     @Primary
-    public DruidDataSource druidDataSource(){
+    public DruidDataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setUrl(dataSourceProperties.getUrl());
         druidDataSource.setUsername(dataSourceProperties.getUsername());
@@ -73,6 +81,7 @@ public class SeataDataSourceAutoConfig {
 
     /**
      * 构造datasource代理对象，替换原来的datasource
+     *
      * @param druidDataSource
      * @return
      */
@@ -92,11 +101,27 @@ public class SeataDataSourceAutoConfig {
 
         SqlSessionFactory factory = null;
         try {
+            // 解决分页不生效
+            Interceptor[] plugins = {paginationInterceptor};
+            bean.setPlugins(plugins);
             factory = bean.getObject();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return factory;
     }
+
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
+        // paginationInterceptor.setOverflow(false);
+        // 设置最大单页限制数量，默认 500 条，-1 不受限制
+        // paginationInterceptor.setLimit(500);
+        // 开启 count 的 join 优化,只针对部分 left join
+        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+        return paginationInterceptor;
+    }
+
 
 }

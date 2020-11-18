@@ -1,11 +1,9 @@
 package com.hu.controller;
 
 import com.hu.exception.BusinessException;
-import com.hu.pojo.bo.PaymentBO;
+import com.hu.pojo.vo.PaymentPageVO;
 import com.hu.result.ResultMessage;
 import com.hu.service.PaymentService;
-import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validation;
 import java.util.Set;
 
@@ -30,7 +29,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
 
-    @RequestMapping(value = "/payment",method = RequestMethod.GET)
+    @RequestMapping(value = "/payment", method = RequestMethod.GET)
     public ResultMessage payment() {
 //        validateParam(payment);
 //        try{
@@ -42,15 +41,18 @@ public class PaymentController {
         return ResultMessage.success().message("payment调用成功");
     }
 
-    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     public ResultMessage test() throws Exception {
-        System.out.println("payment全局事务，XID = " + RootContext.getXID());
         paymentService.test();
         return ResultMessage.success().message("payment调用成功");
     }
 
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    public ResultMessage page(@RequestBody @Valid PaymentPageVO paymentPageVO) throws Exception {
+        return ResultMessage.success(paymentService.page(paymentPageVO));
+    }
 
-    public static void validateParam(Object o)  {
+    public static void validateParam(Object o) {
         Set<ConstraintViolation<Object>> validResult = Validation.buildDefaultValidatorFactory().getValidator().validate(o);
         if (null != validResult && validResult.size() > 0) {
             for (ConstraintViolation<Object> constraintViolation : validResult) {

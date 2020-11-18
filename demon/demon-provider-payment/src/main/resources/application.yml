@@ -79,11 +79,11 @@ security:
     resource:
       user-info-uri: http://demon-security-auth/demon-security-auth/user/info
 
-#logging:
-#  level:
-#    com:
-#      hu:
-#       mapper: debug
+logging:
+  level:
+    com:
+      hu:
+       mapper: debug
 #    io:
 #      seata: debug
 
