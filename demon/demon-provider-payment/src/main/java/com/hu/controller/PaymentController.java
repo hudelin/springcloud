@@ -4,6 +4,8 @@ import com.hu.exception.BusinessException;
 import com.hu.pojo.vo.PaymentPageVO;
 import com.hu.result.ResultMessage;
 import com.hu.service.PaymentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,13 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("payment")
+@Api(tags="用户管理")
 public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
 
-
+    @ApiOperation("创建用户")
     @RequestMapping(value = "/payment", method = RequestMethod.GET)
     public ResultMessage payment() {
 //        validateParam(payment);
