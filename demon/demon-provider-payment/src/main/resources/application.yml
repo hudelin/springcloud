@@ -93,9 +93,6 @@ logging:
     com:
       hu:
        mapper: debug
-#    io:
-#      seata: debug
-
 
 #seata:
 #  enabled: true
