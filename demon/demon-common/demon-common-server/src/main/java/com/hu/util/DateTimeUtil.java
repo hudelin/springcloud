@@ -22,6 +22,14 @@ public class DateTimeUtil {
     public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
     /**
+     * 获取当前时间
+     * @return
+     */
+    public static Date getNowDateTime() {
+        return Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
      * LocalDateTime转时间字符串
      *
      * @param localDateTime
