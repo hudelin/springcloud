@@ -18,10 +18,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @MapperScan("com.hu.mapper")
 //@EnableAutoDataSourceProxy
-public class DemonConsumerOrderApplication {
+public class DemonOrderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemonConsumerOrderApplication.class, args);
+        SpringApplication.run(DemonOrderApplication.class, args);
     }
 
 }

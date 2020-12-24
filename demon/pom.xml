@@ -17,8 +17,8 @@
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>demon-provider-payment</module>
-        <module>demon-consumer-order</module>
+        <module>demon-payment</module>
+        <module>demon-order</module>
         <module>demon-gateway</module>
         <module>demon-nacos-config</module>
         <module>demon-sentinel</module>

@@ -1,7 +1,7 @@
 server:
   port: 8001
   servlet:
-    context-path: /demon-payment-service
+    context-path: /demon-payment
   tomcat:
     uri-encoding: utf-8
 
