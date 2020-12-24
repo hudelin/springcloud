@@ -35,10 +35,10 @@ public class WebLogAspect {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         log.info("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-        log.info("请求地址 : " +request.getRequestURL().toString());
-        log.info("请求方式 : " + request.getMethod());
-        log.info("请求的方法 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        log.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
+        log.info("请求地址 : {}" ,request.getRequestURL().toString());
+        log.info("请求方式 : {}" ,request.getMethod());
+        log.info("请求的方法 : {}" , joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        log.info("参数 : {}" , Arrays.toString(joinPoint.getArgs()));
     }
 
     /**
@@ -49,7 +49,7 @@ public class WebLogAspect {
     @AfterReturning(returning = "ret", pointcut = "logPointCut()")
     public void logPointCut(Object ret) throws Throwable {
         // 处理完请求，返回内容
-        log.info("返回值 : " + ret);
+        log.info("返回值 : {}" ,ret);
     }
 
     @Around("logPointCut()")
@@ -57,7 +57,7 @@ public class WebLogAspect {
         long startTime = System.currentTimeMillis();
         // ob 为方法的返回值
         Object ob = pjp.proceed();
-        log.info("耗时 : " + (System.currentTimeMillis() - startTime));
+        log.info("耗时 : {}s" , (System.currentTimeMillis() - startTime)/1000);
         return ob;
     }
 }
