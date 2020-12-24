@@ -5,16 +5,16 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 /**
- * @author : hudelin
- * @className :PaymentBO
- * @description : 支付BO
- * @date: 2020-08-13 15:06
+ * @author hudelin
+ * @date 2020/12/23
  */
 @Data
-public class PaymentBO {
+public class DemonOrderBO {
 
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long paymentId;
+    private Long id;
 
-    private String serial;
+    private String orderId;
+
+    private String orderStatus;
 }

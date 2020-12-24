@@ -1,5 +1,8 @@
 package com.hu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hu.pojo.bo.DemonOrderBO;
+import com.hu.pojo.vo.OrderPageVO;
 import com.hu.result.ResultMessage;
 
 /**
@@ -16,5 +19,13 @@ public interface OrderService {
      * @throws Exception
      */
     ResultMessage submit() throws Exception;
+
+    /**
+     * 提交订单
+     *
+     * @return
+     * @throws Exception
+     */
+    Page<DemonOrderBO> listOrder(OrderPageVO orderPageVO) throws Exception;
 
 }
