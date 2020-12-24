@@ -1,23 +1,9 @@
-server:
-  port: 7001
-  servlet:
-    context-path: /demon-nacos-config
-  tomcat:
-    uri-encoding: utf-8
-
 spring:
-  application:
-    name: demon-nacos-config
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-      config:
-        server-addr: 127.0.0.1:8848
-        file-extension: yaml
-        ext-config:
-          - data-id: order.yaml
-            refresh: true
-            group: DEFAULT_GROUP
+  profiles:
+    #当前生效环境
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
