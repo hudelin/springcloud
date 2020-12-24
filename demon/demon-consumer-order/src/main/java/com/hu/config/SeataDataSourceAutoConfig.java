@@ -2,17 +2,16 @@ package com.hu.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.hu.handler.MyMetaObjectHandler;
-import io.seata.rm.datasource.DataSourceProxy;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,13 +37,7 @@ public class SeataDataSourceAutoConfig {
     private DataSourceProperties dataSourceProperties;
 
     @Autowired
-    private PaginationInterceptor paginationInterceptor;
-
-    @Value("${order.name}")
-    private String datasourceUrl;
-
-    @Value("${order-name}")
-    private String d;
+    private MybatisPlusInterceptor paginationInterceptor;
 
     /**
      * init durid datasource
@@ -94,14 +87,16 @@ public class SeataDataSourceAutoConfig {
      * @param druidDataSource
      * @return
      */
-    @Primary
-    @Bean("dataSource")
-    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
-        return new DataSourceProxy(druidDataSource);
-    }
+//    @Primary
+//    @Bean("dataSource")
+//    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
+//        return new DataSourceProxy(druidDataSource);
+//    }
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+    public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSourceProxy) throws Exception {
+
+//    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
         MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
 
         GlobalConfig globalConfig  = new GlobalConfig();
@@ -126,16 +121,23 @@ public class SeataDataSourceAutoConfig {
         return factory;
     }
 
+//    @Bean
+//    public PaginationInterceptor paginationInterceptor() {
+//        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+//        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
+//        // paginationInterceptor.setOverflow(false);
+//        // 设置最大单页限制数量，默认 500 条，-1 不受限制
+//        // paginationInterceptor.setLimit(500);
+//        // 开启 count 的 join 优化,只针对部分 left join
+//        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
+//        return paginationInterceptor;
+//    }
     @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
-        // 设置请求的页面大于最大页后操作， true调回到首页，false 继续请求  默认false
-        // paginationInterceptor.setOverflow(false);
-        // 设置最大单页限制数量，默认 500 条，-1 不受限制
-        // paginationInterceptor.setLimit(500);
-        // 开启 count 的 join 优化,只针对部分 left join
-        paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
-        return paginationInterceptor;
+    public MybatisPlusInterceptor paginationInterceptor(){
+        MybatisPlusInterceptor mybatisPlusInterceptor=new MybatisPlusInterceptor();
+        PaginationInnerInterceptor paginationInnerInterceptor=new PaginationInnerInterceptor();
+        mybatisPlusInterceptor.addInnerInterceptor(paginationInnerInterceptor);
+        return mybatisPlusInterceptor;
     }
 
 }

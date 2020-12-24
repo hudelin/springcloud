@@ -19,22 +19,45 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>seata-all</groupId>
-                    <artifactId>io.seata</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!-- 集成easypoi组件 .导入导出-->
+<!--        <dependency>-->
+<!--            <groupId>cn.afterturn</groupId>-->
+<!--            <artifactId>easypoi-base</artifactId>-->
+<!--            <version>4.1.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>cn.afterturn</groupId>-->
+<!--            <artifactId>easypoi-web</artifactId>-->
+<!--            <version>4.1.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>cn.afterturn</groupId>-->
+<!--            <artifactId>easypoi-annotation</artifactId>-->
+<!--            <version>4.1.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
-            <groupId>io.seata</groupId>
-            <artifactId>seata-all</artifactId>
-            <version>${seata.version}</version>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-spring-boot-starter</artifactId>
+            <version>4.0.0</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>seata-all</groupId>-->
+<!--                    <artifactId>io.seata</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.seata</groupId>-->
+<!--            <artifactId>seata-all</artifactId>-->
+<!--            <version>${seata.version}</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

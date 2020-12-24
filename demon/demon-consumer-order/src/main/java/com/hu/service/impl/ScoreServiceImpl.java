@@ -5,16 +5,11 @@ import com.hu.openfeign.PaymentApi;
 import com.hu.pojo.po.Score;
 import com.hu.service.ScoreService;
 import com.hu.util.IdFactorySnowFlakeUtil;
-import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -33,10 +28,10 @@ public class ScoreServiceImpl implements ScoreService {
     private PaymentApi paymentApi;
 
     @Override
-    @GlobalTransactional
+//    @GlobalTransactional
     @Transactional(rollbackFor = Exception.class)
     public void test() throws Exception {
-        System.out.println("开始全局事务，XID = " + RootContext.getXID());
+//        System.out.println("开始全局事务，XID = " + RootContext.getXID());
         Random r = new Random();
         paymentApi.test();
         Score build = Score.builder()

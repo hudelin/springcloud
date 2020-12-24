@@ -23,10 +23,10 @@ public class Initialization implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Map<String, Object> beansWithAnnotation = BaseApplicationContext.getContext().getBeansWithAnnotation(PayTypeAnnotation.class);
-        for (Object bean : beansWithAnnotation.values()) {
-            PayTypeAnnotation annotation = bean.getClass().getAnnotation(PayTypeAnnotation.class);
-            PAY_STRATEGY_MAP.put(annotation.value().getName(), (PayHandler) bean);
-        }
+//        Map<String, Object> beansWithAnnotation = BaseApplicationContext.getContext().getBeansWithAnnotation(PayTypeAnnotation.class);
+//        for (Object bean : beansWithAnnotation.values()) {
+//            PayTypeAnnotation annotation = bean.getClass().getAnnotation(PayTypeAnnotation.class);
+//            PAY_STRATEGY_MAP.put(annotation.value().getName(), (PayHandler) bean);
+//        }
     }
 }
