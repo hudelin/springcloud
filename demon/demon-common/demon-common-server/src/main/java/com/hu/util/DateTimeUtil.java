@@ -218,9 +218,9 @@ public class DateTimeUtil {
         return LocalDateTime.of(LocalDate.now().with(lastDayOfMonth()), LocalTime.MAX);
     }
 
-    public static void main(String[] args) throws Exception {
-        System.out.println(getLocalDateTimeOfDayLastTime());
-    }
+//    public static void main(String[] args) throws Exception {
+//        System.out.println(getLocalDateTimeOfDayLastTime());
+//    }
 
 
 }

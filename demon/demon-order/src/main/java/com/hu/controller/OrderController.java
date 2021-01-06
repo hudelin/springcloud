@@ -7,6 +7,7 @@ import com.hu.pojo.vo.MsgClient;
 import com.hu.pojo.vo.OrderPageVO;
 import com.hu.redisson.RedissonService;
 import com.hu.result.ResultMessage;
+import com.hu.rocketmq.Producer;
 import com.hu.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,6 +38,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class OrderController {
 
+    @Resource
+    private Producer producer;
 
 
     @Autowired
@@ -61,6 +65,9 @@ public class OrderController {
 //        scoreService.test();
         String key = (String) redisTemplate.opsForHash().get("channel_" + "SSC20200322181100000231" + "_hash", "channel_key");
         System.out.println(Initialization.PAY_STRATEGY_MAP);
+
+        producer.sendLogMsg();
+
 
 //        RLock lock = redissonService.getRLock(key);
 //        try {
