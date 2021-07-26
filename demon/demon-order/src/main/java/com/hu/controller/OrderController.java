@@ -3,6 +3,7 @@ package com.hu.controller;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.hu.init.Initialization;
+import com.hu.openfeign.PaymentApi;
 import com.hu.pojo.vo.MsgClient;
 import com.hu.pojo.vo.OrderPageVO;
 import com.hu.redisson.RedissonService;
@@ -35,11 +36,13 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @RequestMapping("order")
-@Slf4j
+@Slf4j(topic = "ORDER")
 public class OrderController {
 
     @Resource
     private Producer producer;
+    @Autowired
+    private PaymentApi paymentApi;
 
 
     @Autowired
@@ -62,11 +65,11 @@ public class OrderController {
 
     @RequestMapping(value = "/payment/test",method = RequestMethod.POST)
     public ResultMessage payment() throws Exception {
-//        scoreService.test();
+        paymentApi.test();
         String key = (String) redisTemplate.opsForHash().get("channel_" + "SSC20200322181100000231" + "_hash", "channel_key");
-        System.out.println(Initialization.PAY_STRATEGY_MAP);
+//        System.out.println(Initialization.PAY_STRATEGY_MAP);
 
-        producer.sendLogMsg();
+//        producer.sendLogMsg();
 
 
 //        RLock lock = redissonService.getRLock(key);

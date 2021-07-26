@@ -3,7 +3,6 @@ package com.hu.service.impl;
 import com.hu.mapper.PaymentMapper;
 import com.hu.pojo.po.Payment;
 import com.hu.util.IdFactorySnowFlakeUtil;
-import io.seata.core.context.RootContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,7 @@ public class TestImpl {
 
     @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
     public void test() throws Exception {
-        System.out.println("payment全局事务，XID = " + RootContext.getXID());
+//        System.out.println("payment全局事务，XID = " + RootContext.getXID());
         Random r = new Random();
         Payment build = Payment.builder()
                 .serial("测试paymentPropagation.REQUIRES_NEW")

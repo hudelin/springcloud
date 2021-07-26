@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    # nacos
+    nacos:
+      discovery:
+        server-addr: 159.75.16.82:8848
+      config:
+        server-addr: 159.75.16.82:8848
+#        file-extension: yaml
+#        ext-config:
+#          - data-id: order.yaml
+#            refresh: true
+#            group: DEFAULT_GROUP
+  # 数据库
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://159.75.16.82:3306/demon_order?useSSL=false
+    username: root
+    password: mysql
+  # redis
+  redis:
+    host: 159.75.16.82
+    port: 63790
+    lettuce:
+      pool:
+        max-active: 100  # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 10 # 连接池中的最大空闲连接
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 5000  # 连接超时时间（毫秒）
+    password: hudelin
+
+
+## rocketMQ
+#rocketmq:
+#  name-server: 159.75.16.82:9876
+#  producer:
+#    group: demon_producer_group

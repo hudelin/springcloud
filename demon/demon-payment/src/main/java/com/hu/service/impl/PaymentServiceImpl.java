@@ -9,7 +9,6 @@ import com.hu.pojo.vo.PaymentPageVO;
 import com.hu.service.PaymentService;
 import com.hu.util.CopyUtil;
 import com.hu.util.IdFactorySnowFlakeUtil;
-import io.seata.core.context.RootContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void test() throws Exception {
-        System.out.println("payment全局事务，XID = " + RootContext.getXID());
+//        System.out.println("payment全局事务，XID = " + RootContext.getXID());
         Random r = new Random();
         Payment build = Payment.builder()
                 .serial("测试payment")

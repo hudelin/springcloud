@@ -7,14 +7,11 @@ server:
 
 spring:
   application:
-    name: demon-payment-service
+    name: demon-payment
   cloud:
     alibaba:
       seata:
         tx-service-group: demon
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: org.gjt.mm.mysql.Driver
@@ -42,12 +39,12 @@ swagger:
   try-host: http://localhost:${server.port}
 
 
-#feign:
-#  client:
-#    config:
-#      default:
-#        connect-timeout: 10000
-#        read-timeout: 10000
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 1
+        read-timeout: 1
 
 #  mvc:
 #    pathmatch:

@@ -10,7 +10,7 @@ spring:
   #    #开发环境
   #    active: local
   application:
-    name: demon-consumer-order2
+    name: demon-order
   main:
     allow-bean-definition-overriding: true
 #  cloud:
@@ -39,8 +39,8 @@ feign:
   client:
     config:
       default:
-        connect-timeout: 10000
-        read-timeout: 10000
+        connect-timeout: 100
+        read-timeout: 100
 
 #sql打印
 logging:

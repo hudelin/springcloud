@@ -25,6 +25,8 @@
         <module>demon-security-auth</module>
         <module>demon-design-pattern</module>
         <module>demon-common</module>
+        <module>demon-leetcode</module>
+        <module>demon-product</module>
     </modules>
 
 

@@ -26,6 +26,7 @@ import java.util.*;
 public class SwaggerConfiguration implements WebMvcConfigurer {
     private final SwaggerProperties swaggerProperties;
 
+
     public SwaggerConfiguration(SwaggerProperties swaggerProperties) {
         this.swaggerProperties = swaggerProperties;
     }
@@ -41,6 +42,7 @@ public class SwaggerConfiguration implements WebMvcConfigurer {
                 .apiInfo(apiInfo())
 
                 // 接口调试地址
+                // http://localhost:8088/swagger-ui/index.html，注意2.x版本中访问的地址的为http://localhost:8088/swagger-ui.html
                 .host(swaggerProperties.getTryHost())
 
                 // 选择哪些接口作为swagger的doc发布

@@ -1,0 +1,50 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /demon-product
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  #  profiles:
+  #    #开发环境
+  #    active: local
+  application:
+    name: demon-product
+  main:
+    allow-bean-definition-overriding: true
+#  cloud:
+#    alibaba:
+#      seata:
+#        tx-service-group: demon
+
+
+# swagger
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: springfox swagger 3.0整合Demo
+  try-host: http://localhost:${server.port}
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.hu.pojo.po
+  configuration:
+    map-underscore-to-camel-case: true
+
+#feign 连接超时时间
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 100
+        read-timeout: 100
+
+#sql打印
+logging:
+  level:
+    com:
+      hu:
+        mapper: debug

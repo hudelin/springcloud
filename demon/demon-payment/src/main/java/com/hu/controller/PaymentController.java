@@ -16,6 +16,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author : hudelin
@@ -47,6 +48,7 @@ public class PaymentController {
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public ResultMessage test() throws Exception {
         paymentService.test();
+        TimeUnit.SECONDS.sleep(20000);
         return ResultMessage.success().message("payment调用成功");
     }
 
